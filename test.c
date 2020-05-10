@@ -2,7 +2,9 @@
 #include<string.h>
 int main(void)
 {
-    char a[]="this is a test";
-    char* b=strtok(a," ");
-    printf("%s",b);
+    FILE* fp;
+    fp=fopen("tmp.txt","a+");
+    char buf[200];
+    fgets(buf,200,fp);
+    printf("%s",buf);
 }
