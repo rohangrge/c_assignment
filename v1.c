@@ -5,6 +5,12 @@
 #include<stdlib.h>
 #include<unistd.h>
 //#include<conio.h>
+struct upass
+{
+    char* user;
+    char* epwd;
+    
+};
 void cmd();
 void chcmd();
 void chkpwd();
@@ -41,13 +47,20 @@ void chkpwd()
     char inp[40];
     char *udata;
     char* cpass;
-    char* uname=NULL;
+    char* uname;
     FILE* fp;
-    //fp=fopen("/etc/passwd","r");
-    //if(fp==NULL)
-    //printf("File not found error");
-    //fgets(udata,500,fp);
-    //printf("%s",strtok(udata,":"));
+    struct upass db;
+    char* token;
+    int i=0;
+    fp=fopen("passwd.txt","r");
+    char buf[1000];
+    fgets(buf,sizeof(buf),fp);
+    token=strtok(buf,":");
+    db.user=token;
+    token=strtok(NULL,":");
+    db.epwd=token;
+    uname=db.user;
+    
      printf("Changing password for %s\n",uname);//get the user name from the file 
     //printf("\nCurrent password:");
     cpass=getpass("Current password:");
