@@ -11,6 +11,7 @@ void chkpwd();
 void chngpwd();
 int main(void)
 {
+    FILE* fp;
     cmd();
 }
 
@@ -25,16 +26,12 @@ void cmd()
     char a[50]="passwd";    
     if(strcmp(a,com)==0)
     {
-        //printf("You have entered the right command");
-        /*printf("working2\n");
-        typeof(getpass(""));
-        strncpy(p,getpass("Password:"),80);
-        printf("working1");*/
         chkpwd();
         
     }
     else
     {
+      printf("Command '%s' not found\n",com);
       cmd();
     }
 }
@@ -45,9 +42,12 @@ void chkpwd()
     char *udata;
     char* cpass;
     char* uname=NULL;
-    fp=fopen("/etc/passwd","r");
-    fgets(udata,500,fp);
-    printf("%s",strtok(udata,))
+    FILE* fp;
+    //fp=fopen("/etc/passwd","r");
+    //if(fp==NULL)
+    //printf("File not found error");
+    //fgets(udata,500,fp);
+    //printf("%s",strtok(udata,":"));
      printf("Changing password for %s\n",uname);//get the user name from the file 
     //printf("\nCurrent password:");
     cpass=getpass("Current password:");
@@ -58,7 +58,7 @@ void chkpwd()
     else
     {
         printf("passwd: Authentication token manipulation error");
-        printf("\npasswd:passwd unchanged\n");
+        printf("\npasswd:password unchanged\n");
 
     }
     
