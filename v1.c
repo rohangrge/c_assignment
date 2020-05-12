@@ -4,17 +4,18 @@
 //#include<system.h>
 #include<stdlib.h>
 #include<unistd.h>
+#include<stdio.h>
 //#include<conio.h>
 struct upass
 {
     char* user;
-    char* epwd;
+    char *epwd;
     
 };
 struct spwd
 {
     char* suser;
-    char* spwd;
+    char *spwde;
 };
 void cmd();
 void chcmd();
@@ -23,23 +24,20 @@ void chngpwd();
 char* decrypt(char*,char*);
 int main(void)
 {
-    FILE* fp;
     cmd();
 }
-
-
-
 void cmd()
 {   
-    char* com,b[20];
-    char* p;
+    char com[50],b[20];
+    char p[50];
     printf("Enter your command\n");
     scanf("%s",com);
-    char a[50]="passwd";    
-    if(strcmp(a,com)==0)
+    char ap[50]="passwd";    
+    int res=strcmp(ap,com);
+    if(res==0)
     {
-       printf("checkpoint");
-        //chkpwd();
+        //printf("entry");
+        chkpwd();
         
     }
     else
@@ -50,16 +48,18 @@ void cmd()
 }
 void chkpwd()
 {
+    //printf("checkpoint");
     char checker[40];
     char inp[40];
-    char *udata;
-    char* cpass;
+    char udata[500];
+    char cpass[50];
     char* uname;
     FILE* fp;
     struct upass db;
     char* token;
     int i=0;
     fp=fopen("passwd.txt","a+");
+    //printf("checkpoint2");
     char buf[1000];
     fgets(buf,sizeof(buf),fp);
     token=strtok(buf,":");
@@ -71,21 +71,43 @@ void chkpwd()
      FILE* ts;
     struct spwd s3;
     char* tok;
-    char* buffer;
-    ts=fopen("shadow.txt","a+");
-    fgets(buffer,sizeof(buffer),ts);
+    char buffer[1000];
+    ts=fopen("shadow.txt","r");
+    printf("checkpoint3");
+    fgets(buffer,1000,ts);
+    fclose(ts);
+    printf("hmm");
     tok=strtok(buffer,":");
     s3.suser=tok;
     tok=strtok(NULL,":");
-    s3.spwd=tok;
-    char* decrypte=decrypt(db.epwd,s3.spwd);
-    
+    s3.spwde=tok;
+    fclose(ts);
+    printf("checkpoint4");
+    //char* decrypte=decrypt(db.epwd,s3.spwde);
+    //printf("decrypte%s",decrypte);
+    char decryptedMsg[100];
+    char *msg;char *key;
+    msg=db.epwd;
+    key=s3.spwde;
+    int msgLen = strlen(msg), keyLen = strlen(key),j;
+    //printf("%d%d",msgLen,keyLen);
+    //printf("checkpoint5");
+    for(i = 0; i < msgLen; ++i)
+    {
+        decryptedMsg[i] = (((msg[i] - key[i]) + 26) % 26) + 'A';
+        
+    } 
+    printf("\n%s\n",decryptedMsg);
+    printf("checkpoint7");
 
     
      printf("Changing password for %s\n",uname);//get the user name from the file 
     //printf("\nCurrent password:");
-    cpass=getpass("Current password:");
-    if(strcmp(decrypte,cpass)==0)
+    //cpass=getpass("Current password:");
+    printf("Current password");
+    scanf("%s",cpass);
+    //printf("checkpoint8");
+    if(strcmp(decryptedMsg,cpass)==0)
     {
         chngpwd();
     }
@@ -100,9 +122,9 @@ void chkpwd()
 }
 void chngpwd()
 {
-
+   printf("in chngpwd()");
 }
-char* decrypt(char* key,char* msg)
+/*char* decrypt(char* key,char* msg)
 {
     char* decryptedMsg;
     int msgLen = strlen(msg), keyLen = strlen(key), i, j;
@@ -112,8 +134,10 @@ char* decrypt(char* key,char* msg)
     } 
  
     decryptedMsg[i] = '\0';
-return decryptedMsg;
+    char* dtype=typeof(decryptedMsg);
+    printf("%s",dtype);
+return(decryptedMsg);
  
-}
+}*/
 
     
