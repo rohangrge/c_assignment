@@ -1,9 +1,11 @@
 #include<stdio.h>
 #include<string.h>
  
-int main(){
-    char msg[] = "x2";
-    char key[] = "hello";
+int main()
+{
+
+    char msg[] = "rohan";
+    char key[] = "key";
     int msgLen = strlen(msg), keyLen = strlen(key), i, j;
  
     char newKey[msgLen], encryptedMsg[msgLen], decryptedMsg[msgLen];
