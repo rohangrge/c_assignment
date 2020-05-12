@@ -31,14 +31,15 @@ int main(void)
 
 void cmd()
 {   
-    char com[50],b[20];
+    char* com,b[20];
     char* p;
     printf("Enter your command\n");
     scanf("%s",com);
     char a[50]="passwd";    
     if(strcmp(a,com)==0)
     {
-        chkpwd();
+       printf("checkpoint");
+        //chkpwd();
         
     }
     else
@@ -58,7 +59,7 @@ void chkpwd()
     struct upass db;
     char* token;
     int i=0;
-    fp=fopen("passwd.txt","r");
+    fp=fopen("passwd.txt","a+");
     char buf[1000];
     fgets(buf,sizeof(buf),fp);
     token=strtok(buf,":");
@@ -103,6 +104,7 @@ void chngpwd()
 }
 char* decrypt(char* key,char* msg)
 {
+    char* decryptedMsg;
     int msgLen = strlen(msg), keyLen = strlen(key), i, j;
     for(i = 0; i < msgLen; ++i)
     {
