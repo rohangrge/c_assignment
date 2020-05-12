@@ -11,10 +11,16 @@ struct upass
     char* epwd;
     
 };
+struct spwd
+{
+    char* suser;
+    char* spwd;
+};
 void cmd();
 void chcmd();
 void chkpwd();
 void chngpwd();
+char* decrypt(char*,char*);
 int main(void)
 {
     FILE* fp;
@@ -60,11 +66,25 @@ void chkpwd()
     token=strtok(NULL,":");
     db.epwd=token;
     uname=db.user;
+    fclose(fp);
+     FILE* ts;
+    struct spwd s3;
+    char* tok;
+    char* buffer;
+    ts=fopen("shadow.txt","a+");
+    fgets(buffer,sizeof(buffer),ts);
+    tok=strtok(buffer,":");
+    s3.suser=tok;
+    tok=strtok(NULL,":");
+    s3.spwd=tok;
+    char* decrypte=decrypt(db.epwd,s3.spwd);
+    
+
     
      printf("Changing password for %s\n",uname);//get the user name from the file 
     //printf("\nCurrent password:");
     cpass=getpass("Current password:");
-    if(strcmp(checker,inp)==0)
+    if(strcmp(decrypte,cpass)==0)
     {
         chngpwd();
     }
@@ -80,6 +100,18 @@ void chkpwd()
 void chngpwd()
 {
 
+}
+char* decrypt(char* key,char* msg)
+{
+    int msgLen = strlen(msg), keyLen = strlen(key), i, j;
+    for(i = 0; i < msgLen; ++i)
+    {
+        decryptedMsg[i] = (((msg[i] - key[i]) + 26) % 26) + 'A';
+    } 
+ 
+    decryptedMsg[i] = '\0';
+return decryptedMsg;
+ 
 }
 
     
