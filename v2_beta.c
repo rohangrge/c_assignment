@@ -6,6 +6,7 @@
 #include<unistd.h>
 #include<stdio.h>
 //#include<conio.h>
+#include "user.h"
 struct upass
 {
     char* user;
@@ -23,10 +24,10 @@ struct spwd
     char *inact;
     char *exp;
 };
-void cmd();
+/*void cmd();
 void chcmd();
 void chkpwd();
-void chngpwd();
+void chngpwd();*/
 char* decrypt(char*,char*);
 int main(void)
 {
@@ -58,7 +59,7 @@ void chkpwd()
     char checker[40];
     char inp[40];
     char udata[500];
-    char *cpass;
+    char cpass[30];
      FILE* fp;
     struct upass db;
     char* token;
@@ -106,7 +107,7 @@ void chkpwd()
       for(f = 0; (f< 100 && s3.spwde[f] != '\0'); f++)
       {
         s3.spwde[f] = s3.spwde[f] - 3;
-    } 
+     } 
     printf("\n%s\n",s3.spwde);
     
 
@@ -116,9 +117,10 @@ void chkpwd()
     //cpass=getpass("Current password:");
     printf("Current password");
     scanf("%s",cpass);
-    //printf("checkpoint8");
+    printf("checkpoint8");
     if(strcmp(s3.spwde,cpass)==0)
     {
+        printf("inside");
         chngpwd();
     }
     else
