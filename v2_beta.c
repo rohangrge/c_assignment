@@ -63,7 +63,14 @@ void chkpwd()
     struct upass db;
     char* token;
     int i=0;
-    fp=fopen("passwd.txt","r");
+    char path[MAX_PATH];
+    const char* temp = getenv("etc/passwd");
+    printf("%s",temp);
+    if(temp == NULL)
+    {
+        printf("file not found error");
+    }
+    fp=fopen(temp,"r");
     char buf[1000];
     fgets(buf,sizeof(buf),fp);
     token=strtok(buf,":");

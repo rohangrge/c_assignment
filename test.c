@@ -1,4 +1,4 @@
-#include<stdio.h>
+/*#include<stdio.h>
 #include<string.h>
 struct upass
 {
@@ -24,4 +24,15 @@ int main(void)
     db.epwd=token;
     printf("user name%s\n",db.user);
     printf("passwd%s\n",db.epwd);
+}*/
+#include <stdio.h>
+ 
+void main(int argc, char *argv[], char * envp[])
+{
+    int i;
+ 
+    for (i = 0; envp[i] != NULL; i++)
+    {    
+        printf("\n%s", envp[i]);
+    }
 }
