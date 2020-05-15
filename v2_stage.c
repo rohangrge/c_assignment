@@ -31,7 +31,6 @@ void chngpwd();*/
 char* decrypt(char*,char*);
 int main(void)
 {
-    
     cmd();
 }
 void cmd()
@@ -66,19 +65,13 @@ void chkpwd()
     char* token;
     int i=0;
     char path[MAX_PATH];
-    const char* temp = getenv("PFILE");
-    char* split;
-    char *passwd;char *shadow;
-    split=strtok(temp,":");
-    passwd=split;
-    split=strtok(NULL,":");
-    shadow=split;
-    
-    if(shadow == NULL)
+    const char* temp = getenv("etc/passwd");
+    printf("%s",temp);
+    if(temp == NULL)
     {
         printf("file not found error");
     }
-    fp=fopen(passwd,"r");
+    fp=fopen(temp,"r");
     char buf[1000];
     fgets(buf,sizeof(buf),fp);
     token=strtok(buf,":");
@@ -96,7 +89,7 @@ void chkpwd()
     int key;
     int f;
     printf("test");
-    ts=fopen(shadow,"r");
+    ts=fopen("shadow.txt","r");
     //printf("hmm");
     fgets(buffer,1000,ts);
     
@@ -123,82 +116,75 @@ void chkpwd()
     //printf("\nCurrent password:");
     //cpass=getpass("Current password:");
     printf("Current password");
-        scanf("%s",cpass);
-        printf("checkpoint8");
-        if(strcmp(s3.spwde,cpass)==0)
-        {
-            printf("inside");
-            chngpwd();
-        }
-        else
-        {
-            printf("passwd: Authentication token manipulation error");
-            printf("\npasswd:password unchanged\n");
-
-        }
-        
+    scanf("%s",cpass);
+    printf("checkpoint8");
+    if(strcmp(s3.spwde,cpass)==0)
+    {
+        printf("inside");
+        chngpwd();
+    }
+    else
+    {
+        printf("passwd: Authentication token manipulation error");
+        printf("\npasswd:password unchanged\n");
 
     }
-    void chngpwd()
-    {
-    char npwd[100];
-    char temp[1000];
-    int f;
-    char* to;
-    const char* tep = getenv("PFILE");
-    char* split;
-    char *passwd;char *shadow;
-    split=strtok(tep,":");
-    passwd=split;
-    split=strtok(NULL,":");
-    shadow=split;
-    char write[100]="";
-    printf("\ntemp\n");
-    //npwd=getpass("New password:");
-    printf("New password:\n");
-    scanf("%s",&npwd);
-    FILE* fm;
-    struct spwd s4;
-    printf("chcek");
-    fm=fopen(shadow,"r");
-    fgets(temp,1000,fm);
-    printf("entere");
-    to=strtok(temp,":");
-    s4.suser=to;
-    to=strtok(NULL,":");
-    s4.spwde=to;
-    to=strtok(NULL,":");
-    s4.lpchng=to;
-    to=strtok(NULL,":");
-    s4.smin=to;
-    to=strtok(NULL,":");
-    s4.smax=to;
-    to=strtok(NULL,":");
-    s4.swarn=to;
-    to=strtok(NULL,":");
-    s4.inact=to;
-    to=strtok(NULL,":");
-    s4.exp=to;
-    printf("het");
-    s4.spwde=npwd;
-    fclose(fm);
-    //printf("check pointtt");
-    for(f = 0; (f< 100 && s4.spwde[f] != '\0'); f++)
-        {
-            s4.spwde[f] = s4.spwde[f] + 3;
-        } 
-        rewind(fm);
-        strcat(write,s4.suser);
-        strcat(write,":");
-        strcat(write,s4.spwde);
-        strcat(write,":");
-        strcat(write,s4.lpchng);
-        strcat(write,":");
-        strcat(write,s4.smin);
-        strcat(write,":");
-        strcat(write,s4.smax);
-        strcat(write,":");
-        strcat(write,s4.swarn);
+    
+
+}
+void chngpwd()
+{
+   char npwd[100];
+   char temp[1000];
+   int f;
+   char* to;
+   char write[100]="";
+   printf("\ntemp\n");
+   //npwd=getpass("New password:");
+   printf("New password:\n");
+   scanf("%s",&npwd);
+   FILE* fm;
+   struct spwd s4;
+   printf("chcek");
+   fm=fopen("shadow.txt","r");
+   fgets(temp,1000,fm);
+   printf("entere");
+   to=strtok(temp,":");
+   s4.suser=to;
+   to=strtok(NULL,":");
+   s4.spwde=to;
+   to=strtok(NULL,":");
+   s4.lpchng=to;
+   to=strtok(NULL,":");
+   s4.smin=to;
+   to=strtok(NULL,":");
+   s4.smax=to;
+   to=strtok(NULL,":");
+   s4.swarn=to;
+   to=strtok(NULL,":");
+   s4.inact=to;
+   to=strtok(NULL,":");
+   s4.exp=to;
+   printf("het");
+   s4.spwde=npwd;
+   fclose(fm);
+   //printf("check pointtt");
+   for(f = 0; (f< 100 && s4.spwde[f] != '\0'); f++)
+      {
+        s4.spwde[f] = s4.spwde[f] + 3;
+    } 
+    rewind(fm);
+    strcat(write,s4.suser);
+    strcat(write,":");
+    strcat(write,s4.spwde);
+    strcat(write,":");
+    strcat(write,s4.lpchng);
+    strcat(write,":");
+    strcat(write,s4.smin);
+    strcat(write,":");
+    strcat(write,s4.smax);
+    strcat(write,":");
+    strcat(write,s4.swarn);
     strcat(write,":");
     strcat(write,s4.inact);
     strcat(write,":");
