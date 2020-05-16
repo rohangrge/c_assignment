@@ -65,13 +65,14 @@ void chkpwd()
     char* token;
     int i=0;
     char path[MAX_PATH];
-    const char* temp = getenv("etc/passwd");
-    printf("%s",temp);
-    if(temp == NULL)
+    const char* temp1= getenv("etc/passwd");    
+    const char* temp2=getenv("etc/shadow");
+    printf("%s",temp1);
+    if(temp1== NULL)
     {
         printf("file not found error");
     }
-    fp=fopen(temp,"r");
+    fp=fopen("PFILE/passwd.txt","r");
     char buf[1000];
     fgets(buf,sizeof(buf),fp);
     token=strtok(buf,":");
@@ -89,7 +90,7 @@ void chkpwd()
     int key;
     int f;
     printf("test");
-    ts=fopen("shadow.txt","r");
+    ts=fopen("PFILE/shadow.txt","r");
     //printf("hmm");
     fgets(buffer,1000,ts);
     
@@ -138,6 +139,8 @@ void chngpwd()
    char temp[1000];
    int f;
    char* to;
+  const char* temp1= getenv("etc/passwd");    
+    const char* temp2=getenv("etc/shadow");
    char write[100]="";
    printf("\ntemp\n");
    //npwd=getpass("New password:");
@@ -146,7 +149,7 @@ void chngpwd()
    FILE* fm;
    struct spwd s4;
    printf("chcek");
-   fm=fopen("shadow.txt","r");
+   fm=fopen("PFILE/shadow.txt","r");
    fgets(temp,1000,fm);
    printf("entere");
    to=strtok(temp,":");
@@ -192,7 +195,7 @@ void chngpwd()
     
     
 
-    fm=fopen("shadow.txt","w");
+    fm=fopen("PFILE/shadow.txt","w");
     char ter[100];
     printf("%s",s4.spwde);
     fwrite(write,sizeof(s4),1,fm);

@@ -67,7 +67,7 @@ void chkpwd()
     int i=0;
     char path[MAX_PATH];
     const char* temp = getenv("PFILE");
-    char* split;
+    char split[1000];
     char *passwd;char *shadow;
     split=strtok(temp,":");
     passwd=split;
