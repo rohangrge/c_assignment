@@ -1,0 +1,3 @@
+all:
+	gcc main1.c	checkpwd.c	changepwd.c	-op
+	

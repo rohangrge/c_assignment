@@ -1,4 +1,4 @@
-#include<stdio.h>
+/*#include<stdio.h>
 struct temp
 {
     char a[10];
@@ -14,4 +14,11 @@ int main(void)
 
     fwrite(&node,sizeof(node),2,fp);
     fclose(fp);
+}*/
+#include<stdio.h>
+#include<stdlib.h>
+int main(void)
+{
+    const char* temp=getenv("PFILE");
+    printf("%s",temp);
 }

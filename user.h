@@ -1,5 +1,6 @@
 #include<stdio.h>
+int main();
 void cmd();
 void chkcmd();
 void chkpwd();
-void chngpwd();
+void chngpwd(char *tpwd,int count);
