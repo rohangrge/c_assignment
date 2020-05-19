@@ -30,6 +30,7 @@ void chngpwd(char *tpwd,int count)
    char *temp;
    int f;
    char* to;
+   putenv("PFILE=PFILE");
   const char* get=getenv("PFILE");
     //const char* temp1= getenv("etc/passwd");    
     // char* temp2=getenv("etc/shadow");
@@ -38,6 +39,7 @@ void chngpwd(char *tpwd,int count)
     strcpy(temp2,get);
     strcat(temp1,"/passwd.txt");
     strcat(temp2,"/shadow.txt");
+    printf("%s",temp2);
    char write[100]="";
    char npwd1[100];
   // npwd=getpass("New password:");
@@ -45,6 +47,7 @@ void chngpwd(char *tpwd,int count)
    scanf("%s",npwd);
    printf("Retype new password:");
    scanf("%s",npwd1);
+   printf("\ncheckpoint1");
    if(strcmp(npwd,npwd1)!=0)
    {
        printf("\nSorry, passwords do not match.");
@@ -52,6 +55,7 @@ void chngpwd(char *tpwd,int count)
        printf("\npasswd: password unchanged\n");
        main();
    }
+   printf("\ncheckpoint2");
    if(strcmp(npwd,npwd1)==0)
    {
        if(strcmp(npwd,tpwd)==0)
@@ -70,10 +74,13 @@ void chngpwd(char *tpwd,int count)
            
        }
    }
+   printf("\ncheckpoint3");
    FILE* fm;
    struct spwd s4;
    fm=fopen(temp2,"r");
+   printf("\nentry");
    fgets(temp,1000,fm);
+   printf("\nchecking");
    to=strtok(temp,":");
    s4.suser=to;
    to=strtok(NULL,":");
@@ -92,10 +99,12 @@ void chngpwd(char *tpwd,int count)
    s4.exp=to;
    s4.spwde=npwd;
    fclose(fm);
+   printf("\ncheckpoint 4");
    for(f = 0; (f< 100 && s4.spwde[f] != '\0'); f++)
       {
         s4.spwde[f] = s4.spwde[f] + 3;
     } 
+    printf("checkpoint7");
     rewind(fm);
     strcat(write,s4.suser);
     strcat(write,":");

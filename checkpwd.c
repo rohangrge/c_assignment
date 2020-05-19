@@ -55,6 +55,7 @@ void chkpwd()
     struct upass db;
     char* token;
     int i=0;
+    putenv("PFILE=PFILE");
     const char* get=getenv("PFILE");
     //const char* temp1= getenv("etc/passwd");    
     // char* temp2=getenv("etc/shadow");

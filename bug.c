@@ -17,8 +17,13 @@ int main(void)
 }*/
 #include<stdio.h>
 #include<stdlib.h>
+//#include<conio.h>
 int main(void)
 {
-    const char* temp=getenv("PFILE");
-    printf("%s",temp);
+    //const char* temp=getenv("PFILE");
+    char *temp="hello";
+    //setenv("TEST",temp,1);
+    putenv("TEST=%s",temp);
+    const char* temp1=getenv("TEST");
+    printf("%s",temp1);
 }
