@@ -28,6 +28,7 @@ void chngpwd(char *tpwd,int count)
 {
    char npwd[100];
    char *temp;
+   temp=(char*)malloc(10000 * sizeof(char));
    int f;
    char* to;
    putenv("PFILE=PFILE");
@@ -40,14 +41,12 @@ void chngpwd(char *tpwd,int count)
     strcat(temp1,"/passwd.txt");
     strcat(temp2,"/shadow.txt");
     printf("%s",temp2);
-   char write[100]="";
    char npwd1[100];
   // npwd=getpass("New password:");
    printf("New password:");
    scanf("%s",npwd);
    printf("Retype new password:");
    scanf("%s",npwd1);
-   printf("\ncheckpoint1");
    if(strcmp(npwd,npwd1)!=0)
    {
        printf("\nSorry, passwords do not match.");
@@ -55,7 +54,7 @@ void chngpwd(char *tpwd,int count)
        printf("\npasswd: password unchanged\n");
        main();
    }
-   printf("\ncheckpoint2");
+
    if(strcmp(npwd,npwd1)==0)
    {
        if(strcmp(npwd,tpwd)==0)
@@ -74,15 +73,20 @@ void chngpwd(char *tpwd,int count)
            
        }
    }
-   printf("\ncheckpoint3");
+   //printf("\ncheckpoint3");
    FILE* fm;
    struct spwd s4;
-   fm=fopen(temp2,"r");
-   printf("\nentry");
+   fm=fopen(temp2,"r+");
+   printf("%s",temp2);
+   //printf("\nentry");
    fgets(temp,1000,fm);
-   printf("\nchecking");
+    //printf("%s in here",temp);
+   //printf("\nchecking");
+   //printf("%sin here",temp);
    to=strtok(temp,":");
+   printf("\ntin");
    s4.suser=to;
+   printf("\nmin");
    to=strtok(NULL,":");
    s4.spwde=to;
    to=strtok(NULL,":");
@@ -98,14 +102,12 @@ void chngpwd(char *tpwd,int count)
    to=strtok(NULL,":");
    s4.exp=to;
    s4.spwde=npwd;
-   fclose(fm);
-   printf("\ncheckpoint 4");
    for(f = 0; (f< 100 && s4.spwde[f] != '\0'); f++)
       {
         s4.spwde[f] = s4.spwde[f] + 3;
     } 
-    printf("checkpoint7");
     rewind(fm);
+    char write[3000];
     strcat(write,s4.suser);
     strcat(write,":");
     strcat(write,s4.spwde);
@@ -124,12 +126,13 @@ void chngpwd(char *tpwd,int count)
     
     
 
-    fm=fopen(temp2,"w");
+    //fm=fopen(temp2,"w");
     char ter[100];
     fwrite(write,sizeof(s4),1,fm);
     fclose(fm);
+    free(temp);
  
-    printf("\nPassword changed succesfully\n");
+    printf("\npasswd:password changed succesfully\n");
     exit(1);
    
    
