@@ -27,7 +27,7 @@ struct spwd
 void chngpwd(char *tpwd,int count)
 {
    char npwd[100];
-   char *temp;
+   char temp[1000];
    //temp=(char*)malloc(10000 * sizeof(char));
    int f;
    char* to;

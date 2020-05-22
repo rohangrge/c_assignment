@@ -1,3 +1,3 @@
-p.o:main1.c changepwd.c checkpwd.c user.h
-	gcc main1.c changepwd.c checkpwd.c user.h
+all:
+	gcc main1.c changepwd.c checkpwd.c user.h -on
 	
