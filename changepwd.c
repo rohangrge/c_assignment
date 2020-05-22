@@ -28,7 +28,7 @@ void chngpwd(char *tpwd,int count)
 {
    char npwd[100];
    char *temp;
-   temp=(char*)malloc(10000 * sizeof(char));
+   //temp=(char*)malloc(10000 * sizeof(char));
    int f;
    char* to;
    putenv("PFILE=PFILE");
