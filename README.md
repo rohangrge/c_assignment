@@ -9,3 +9,4 @@ A make file has been created to execute them in to a single executable P
 there is an environment variable which is PFILE 
 which is referring to the PFILE folder which is present in the program folder
 Major improvements with make file making the code more readable as it is now separated into multiple programs 
+better use to the make file with an understanding of target and dependencies
