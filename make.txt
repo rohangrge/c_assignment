@@ -1,3 +1,8 @@
-all:
-	gcc main1.c changepwd.c checkpwd.c user.h -on
-	
+a.out:main1.o	changepwd.o	checkpwd.o
+	gcc main1.o	changepwd.o	checkpwd.o	-o	a.out
+main1.o:main1.c	user.h
+	gcc	-c	main1.c	user.h
+changepwd.o:changepwd.c	user.h
+	gcc	-c	changepwd.c	user.h
+checkpwd.o:checkpwd.c	user.h
+	gcc	-c	checkpwd.c	user.h		

@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 //#include<pwd.h>
+#include<gtk/gtk.h>
 //#include<system.h>
 #include<stdlib.h>
 #include<unistd.h>
@@ -11,7 +12,6 @@ struct upass
 {
     char* user;
     char *epwd;
-    
 };
 struct spwd
 {
